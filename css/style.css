@@ -1,0 +1,593 @@
+/* ======================================================
+   PROYECTO SAKURA
+====================================================== */
+
+/* ========= GOOGLE DESIGN TOKENS ========= */
+
+:root{
+
+    /* Colores */
+
+    --color-bg: linear-gradient(135deg,#FFF8FA,#FCEEF3);
+
+    --color-surface: rgba(255,255,255,.20);
+
+    --color-border: rgba(255,255,255,.40);
+
+    --color-text:#2B2B2B;
+
+    --color-primary:#4877ce;
+
+    --color-primary-hover:#6d7dd9;
+
+    --color-shadow:rgba(0,0,0,.15);
+
+    /* Espaciados */
+
+    --space-1:4px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:24px;
+    --space-6:32px;
+    --space-7:48px;
+    --space-8:64px;
+
+    /* Bordes */
+
+    --radius-sm:12px;
+    --radius-md:20px;
+    --radius-lg:32px;
+    --radius-xl:50px;
+
+    /* Sombras */
+
+    --shadow-lg:
+        0 20px 45px var(--color-shadow);
+
+    /* Transiciones */
+
+    --transition-fast:.2s;
+
+    --transition-normal:.35s;
+
+    --transition-slow:.6s;
+
+}
+
+/* ========= TEMA OSCURO ========= */
+
+body.dark{
+
+    --color-bg:linear-gradient(135deg,#17171C,#25252F);
+
+    --color-surface:rgba(35,35,45,.35);
+
+    --color-border:rgba(255,255,255,.08);
+
+    --color-text:#F5F5F5;
+
+    --color-shadow:rgba(0,0,0,.35);
+
+}
+
+/* ========= RESET ========= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:"Outfit",sans-serif;
+
+    color:var(--color-text);
+
+    background:var(--color-bg);
+
+    transition:var(--transition-slow);
+
+    overflow:hidden;
+
+    width:100%;
+
+    height:100vh;
+
+}
+
+/* ========= ELEMENTOS BASE ========= */
+
+button{
+
+    font-family:inherit;
+
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px 14px;
+    border-radius:var(--radius-sm);
+    border:1px solid var(--color-border);
+    background:rgba(255,255,255,.7);
+    color:var(--color-text);
+    outline:none;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+    background:rgba(255,255,255,.08);
+}
+
+h1,h2{
+
+    font-family:"Caacupe One",cursive;
+
+}
+
+h1{
+
+    font-size:72px;
+
+}
+
+h2{
+
+    font-size:48px;
+
+}
+
+p{
+
+    line-height:1.8;
+
+    opacity:.9;
+
+}
+
+/* ========= APP ========= */
+
+#app{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:var(--space-5);
+
+}
+
+/* ========= FONDO ========= */
+
+#background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-3;
+
+    background:var(--color-bg);
+
+}
+
+/* ========= PÉTALOS ========= */
+
+#petals{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-2;
+
+    overflow:hidden;
+
+}
+
+.petal{
+
+    position:absolute;
+
+    display:block;
+
+    border-radius:80% 20% 80% 20%;
+
+    background:linear-gradient(135deg,#ffd8e3,#ff9eb0);
+
+    box-shadow:0 0 10px rgba(255,145,169,.35);
+
+    transform:rotate(0deg);
+
+    animation:fall var(--duration, 10s) linear infinite;
+
+    animation-delay:var(--delay, 0s);
+
+}
+
+@keyframes fall{
+
+    0%{
+        transform:translate3d(0,-10vh,0) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translate3d(var(--drift, 0px),110vh,0) rotate(360deg);
+        opacity:0.9;
+    }
+
+}
+
+/* ========= CURSOR ========= */
+
+#cursor{
+
+    width:18px;
+
+    height:18px;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    border-radius:80% 20% 80% 20%;
+
+    background:linear-gradient(135deg,#ffb7c5,#ff8ba7);
+
+    opacity:.85;
+
+    transform:translate(-50%,-50%) rotate(-25deg);
+
+    transition:transform .08s linear, width .2s ease, height .2s ease;
+
+    box-shadow:0 0 12px rgba(248,175,198,.45);
+
+}
+
+#cursor.active{
+
+    width:24px;
+
+    height:24px;
+
+    transform:translate(-50%,-50%) rotate(-15deg) scale(1.1);
+
+}
+
+/* ========= BOTÓN TEMA ========= */
+
+#themeButton{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+    width:52px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    color:var(--color-text);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:var(--shadow-lg);
+
+    transition:var(--transition-normal);
+
+    z-index:100;
+
+}
+
+#themeButton:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ========= GLASS ========= */
+
+.glass{
+
+    width:min(680px,95%);
+
+    padding:var(--space-7);
+
+    background:var(--color-surface);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+/* ========= BOTÓN PRINCIPAL ========= */
+
+.btn{
+
+    margin-top:var(--space-6);
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 30px;
+
+    border-radius:var(--radius-xl);
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-size:16px;
+
+    transition:var(--transition-normal);
+
+}
+
+.plan-form{
+    display:flex;
+    flex-direction:column;
+    gap:var(--space-4);
+    margin-top:var(--space-5);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:var(--space-4);
+}
+
+.field-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.field-group label{
+    font-weight:600;
+    font-size:14px;
+}
+
+.full-width{
+    grid-column:1 / -1;
+}
+
+.confirmation-message{
+    margin-top:var(--space-4);
+    font-weight:600;
+    color:var(--color-primary);
+}
+
+.countdown-card{
+    margin-top:var(--space-4);
+    padding:var(--space-4);
+    border-radius:var(--radius-md);
+    background:rgba(255,255,255,.45);
+    border:1px solid var(--color-border);
+    color:var(--color-text);
+}
+
+body.dark .countdown-card{
+    background:rgba(255,255,255,.08);
+}
+
+.intro-slide{
+    animation: slideUpIn 0.9s ease both;
+}
+
+.intro-slide-1{ animation-name: slideFromLeft; }
+.intro-slide-2{ animation-name: slideFromRight; }
+.intro-slide-3{ animation-name: slideFromBottom; }
+.intro-slide-4{ animation-name: slideFromTop; }
+.intro-slide-5{ animation-name: slideZoomIn; }
+
+@keyframes slideFromLeft {
+    from { opacity:0; transform:translateX(-80px) scale(0.95); }
+    to { opacity:1; transform:translateX(0) scale(1); }
+}
+
+@keyframes slideFromRight {
+    from { opacity:0; transform:translateX(80px) scale(0.95); }
+    to { opacity:1; transform:translateX(0) scale(1); }
+}
+
+@keyframes slideFromBottom {
+    from { opacity:0; transform:translateY(80px) scale(0.96); }
+    to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+@keyframes slideFromTop {
+    from { opacity:0; transform:translateY(-80px) scale(0.96); }
+    to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+@keyframes slideZoomIn {
+    from { opacity:0; transform:scale(0.7); }
+    to { opacity:1; transform:scale(1); }
+}
+
+.btn:hover{
+
+    background:var(--color-primary-hover);
+
+    transform:translateY(-2px);
+
+}
+
+.btn-no{
+    position:relative;
+    transition:left .18s ease, top .18s ease, transform .18s ease;
+}
+
+.choice-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:16px;
+    margin-top:var(--space-6);
+    flex-wrap:wrap;
+}
+
+.btn-no{
+    position:relative;
+    z-index:1;
+}
+
+/* ========= ANIMACIONES ========= */
+
+.fade-in{
+
+    animation:fadeIn .6s forwards;
+
+}
+
+.fade-out{
+
+    animation:fadeOut .6s forwards;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ========= RESPONSIVE ========= */
+
+@media(max-width:768px){
+
+    h1{
+
+        font-size:56px;
+
+    }
+
+    h2{
+
+        font-size:36px;
+
+    }
+
+    .glass{
+
+        padding:var(--space-5);
+
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* ==========================================
+   CURSOR TYPEWRITER
+========================================== */
+
+.cursor{
+
+    display:inline-block;
+
+    width:2px;
+
+    height:1.2em;
+
+    margin-left:2px;
+
+    background:currentColor;
+
+    animation:blink .8s infinite;
+
+    vertical-align:bottom;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}
