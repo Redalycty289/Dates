@@ -27,7 +27,7 @@ const introSlides = [
     {
         name: "intro-4",
         align: "center",
-        title: "Así que pensé ofrecerte una",
+        title: "Así que pensé ofrecerte una buena sonrisa :3",
         text: ""
     },
     {
@@ -62,7 +62,7 @@ introSlides.forEach(({ name, title, text }, index) => {
 function playIntroSequence(index = 0) {
     if (index < introSlides.length) {
         go(introSlides[index].name);
-        setTimeout(() => playIntroSequence(index + 1), 7000);
+        setTimeout(() => playIntroSequence(index + 1), 6000);
         return;
     }
 
