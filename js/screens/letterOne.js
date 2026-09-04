@@ -62,6 +62,11 @@ export default function LetterOne(){
                 noImage.classList.remove("image-change");
                 void noImage.offsetWidth;
                 noImage.classList.add("image-change");
+
+                if (noImageIndex === noImages.length - 1) {
+                    noButton.remove();
+                    yesButton.classList.add("yes-final");
+                }
             }
         });
 

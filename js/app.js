@@ -4,6 +4,8 @@ import Loader from "./screens/loader.js";
 import Home from "./screens/home.js";
 import LetterOne from "./screens/letterOne.js";
 import Agenda from "./screens/agenda.js";
+import Password from "./screens/password.js";
+import Montage from "./screens/montage.js";
 
 const introSlides = [
     {
@@ -44,6 +46,8 @@ register("loader", Loader);
 register("home", Home);
 register("letterOne", LetterOne);
 register("agenda", Agenda);
+register("password", Password);
+register("montage", Montage);
 
 introSlides.forEach(({ name, title, text }, index) => {
     register(name, () => {

@@ -1,4 +1,5 @@
 import { appConfig } from "../config.js";
+import { go } from "../router.js";
 
 export default function Agenda() {
 
@@ -45,7 +46,7 @@ export default function Agenda() {
                         id="pickup"
                         name="pickup"
                         type="text"
-                        placeholder="Ej. En tu casa, cerca del centro, frente a la estación..."
+                        placeholder="Ej. En tu casa, en la utec, frente a la estación..."
                         required>
                 </div>
 
@@ -55,8 +56,7 @@ export default function Agenda() {
                         id="details"
                         name="details"
                         rows="3"
-                        placeholder="Ayúdame a hacer el plan más bonito...">
-                    </textarea>
+                        placeholder="Ayúdame a hacer el plan más bonito..."></textarea>
                 </div>
 
             </div>
@@ -95,7 +95,7 @@ export default function Agenda() {
             createdAt: new Date().toISOString()
         };
 
-        localStorage.setItem("sakuraPlan", JSON.stringify(payload));
+        localStorage.setItem("planData", JSON.stringify(payload));
 
         try {
             if (appConfig.googleScriptUrl) {
@@ -112,17 +112,11 @@ export default function Agenda() {
             console.warn("No se pudo enviar al Apps Script, se guardó localmente.", error);
         }
 
-        const mailBody = encodeURIComponent(
-            `Hola Erick,\n\nTengo un nuevo plan para la sorpresa:\n\n- Fecha: ${date}\n- Hora: ${time}\n- Tipo de plan: ${planType}\n- Lugar de recogida: ${pickup}\n- Detalles: ${details}\n- Fecha de registro: ${new Date().toLocaleString()}\n`
-        );
-
-        const mailLink = `mailto:${appConfig.targetEmail}?subject=${encodeURIComponent("Nuevo plan para Proyecto Sakura")}&body=${mailBody}`;
-
         message.textContent = "¡Gracias! Será un día muy especial";
 
         setTimeout(() => {
-            window.location.href = mailLink;
-        }, 400);
+            go("password");
+        }, 5000);
 
     });
 

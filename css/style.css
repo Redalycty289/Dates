@@ -1,5 +1,5 @@
 /* ======================================================
-   PROYECTO SAKURA
+    PROYECTO
 ====================================================== */
 
 /* ========= GOOGLE DESIGN TOKENS ========= */
@@ -132,6 +132,11 @@ body.dark input,
 body.dark select,
 body.dark textarea{
     background:rgba(255,255,255,.08);
+}
+
+body.dark select option{
+    background:#2a2931;
+    color:#f5f5f5;
 }
 
 h1,h2{
@@ -355,6 +360,77 @@ p{
 
 }
 
+.password-screen{
+    text-align:center;
+}
+
+.password-form{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    width:min(360px,100%);
+    margin:var(--space-6) auto 0;
+}
+
+.password-form label{
+    font-weight:600;
+}
+
+.password-form input{
+    text-align:center;
+}
+
+.montage-screen{
+    width:min(760px,100%);
+    padding:clamp(24px,6vw,64px) 0 12vh;
+    text-align:center;
+}
+
+.montage-intro{
+    min-height:45vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.montage-gallery{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:clamp(48px,10vh,120px);
+}
+
+.montage-image{
+    display:block;
+    width:min(100%,700px);
+    height:auto;
+    max-height:none;
+    object-fit:contain;
+    border-radius:var(--radius-md);
+    box-shadow:0 16px 36px rgba(0,0,0,.22);
+}
+
+.montage-empty{
+    margin-top:var(--space-7);
+    opacity:.75;
+}
+
+.montage-finale{
+    min-height:45vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#8ed8f2;
+    opacity:0;
+    transition:opacity 1.5s ease;
+}
+
+.montage-finale-visible{
+    opacity:1;
+}
+
 /* ========= BOTÓN PRINCIPAL ========= */
 
 .btn{
@@ -509,6 +585,19 @@ body.dark .countdown-card{
     z-index:1;
 }
 
+.yes-final{
+    background:linear-gradient(135deg,#d8f4ff,#8ed8f2);
+    color:#17232b;
+    font-size:22px;
+    padding:18px 48px;
+    box-shadow:0 10px 24px rgba(105,201,232,.35);
+}
+
+.yes-final:hover{
+    background:linear-gradient(135deg,#c2edfc,#69c9e8);
+    color:#17232b;
+}
+
 /* ========= ANIMACIONES ========= */
 
 .fade-in{
@@ -631,6 +720,15 @@ body.dark .countdown-card{
 
     .choice-row .btn{
         flex-basis:100%;
+    }
+
+    .montage-screen{
+        padding-top:24px;
+    }
+
+    .montage-intro,
+    .montage-finale{
+        min-height:38vh;
     }
 
 }
